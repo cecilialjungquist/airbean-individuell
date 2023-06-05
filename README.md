@@ -1,32 +1,29 @@
-# Airbean by Ruby Rollers
+# Airbean - Individuell examination
 
 ## Instruktioner
 
-I detta grupparbete ska vi skapa ett API för en webbapp där det går att beställa kaffe och få den levererad via drönare (drönare ingår ej i uppgiften).
+I den individuella delen av Airbean så ska du skapa ett admin-gränssnitt för att hantera menyn. Det ska gå och lägga till och ta bort produkter.
 
-## Arbetsgång
+Krav på funktionalitet:
+* Kunna lägga till en ny produkt i menyn. Man ska enbart kunna skicka med de egenskaper som finns på en produkt (id, title, desc, price) i bodyn. Alla egenskaper ska också finnas med. Det ska även läggas på en createdAt med datum och tid när den skapades.
+* Kunna modifiera en produkt, om en produkt modifieras så ska en egenskap (modifiedAt) läggas till med datum och tid.
+* Kunna ta bort en produkt. Det ska enbart gå att ta bort en produkt som finns.
+Uppnås inte kraven ovan ska ett passande felmeddelande skickas tillbaka.
 
-1. Läs igenom alla user stories och försök bestämma vad för api endpoints vi behöver.
-2. Diskutera hur vår datamodell ska se ut och vad för data ska vi skicka tillbaka. 
-3. Dela upp arbetet.
+* Alla tre endpoints:en ska vara skyddade med att användaren som loggar in ska ha en roll som heter admin (som finns sparad i databasen) som kontrolleras via en middleware. Användaren kan ni manuellt lägga till i databasen men det ska gå och kunna logga in d.v.s. ni behöver en endpoint för att logga in men det är inget krav för skapa konto.
+* Menyn är sparad i en NeDB-databas.
+* Det ska finnas en endpoint för att kunna lägga till kampanjerbjudanden som ska sparas i databasen enligt följande modell:
+- Vilka produkter som ingår (ex. bryggkaffe och Gustav Adolfsbakelse, ska valideras att dessa produkter finns)
+- Kampanjpris för denna kombination (ex. 40 kr totalt)
 
-### Kriterier
+## För Godkänt:
+Uppnår alla krav på funktionalitet.
 
-* Uppfyller alla krav av funktionalitet.
-* Använder sig av Express och NeDB som databas (en annan databas exempelvis MongoDB är okej ifall alla i gruppen är överens om detta).
-* All input som skickas i url eller i body ska valideras i en middleware och ifall det är fel data ska ett felmeddelande skickas tillbaka.
-* Det ska enbart gå att lägga till produkter som finns i menyn, ifall någon annan produkt skickas med så ska ett felmeddelande skickas tillbaka. Även pris ska kontrolleras, allt detta ska göras i en middleware.
-* När ett konto skapas ska detta kopplas till ett slumpat användarid (här används fördelaktigt ett bibliotek) där användarid:et sedan kan användas för att hämta orderhistorik, användarnamn ska alltså ej skickas med i url för att hämta orderhistorik.
-* Kunna se pågående beställningar och tidigare beställningar (man kollar när beställningen lades (klockslag) gentemot vad klockan är nu. Här är det godkänt att använda något bibliotek för datum och tidshantering (ex. `moment.js` eller `date-fns`).
+## För Väl Godkänt:
+Använder sig av JSON web token för att returnera en token som innehåller användarens roll och som används för att sedan kontrollera access till routes enligt ovan.
+Använder sig av Bcrypt.js för att kryptera lösenord vid skapandet av konto. Här är det fördelaktigt att lägga till funktionalitet för att skapa konto.
 
-
-## Contributors
-- cecilialjungquist
-- samCcode
-- Lodenius
-- LisaRydCarlsson
-
-# Methods
+## Methods
 
 ### Hämta menyn
 ` GET /api/beans `
