@@ -1,7 +1,7 @@
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
 const { getMenu } = require('../menu/menu.js');
-const { checkProperty, plannedDelivery, isDelivered, checkDelivery, orderValidation } = require('../utils.js');
+const { checkProperty, plannedDelivery, isDelivered, checkDelivery, orderValidation } = require('../utils/general.js');
 const { updateUserOrders, findUsers } = require('../users/users.js');
 const router = express.Router();
 

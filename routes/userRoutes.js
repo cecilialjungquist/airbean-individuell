@@ -1,6 +1,6 @@
 const express = require('express');
 const { findUsers, createUser } = require('../users/users.js');
-const { checkProperty, login } = require('../utils.js');
+const { checkProperty, login } = require('../utils/general.js');
 const router = express.Router();
 
 // Skapa konto
@@ -39,17 +39,6 @@ router.post('/login', checkProperty('username'), checkProperty('password'), asyn
         success: true,
         message: 'Login ok.'
     }
-
-    // const [ user ] = await findUsers('username', currentUser.username);
-    // if (user) {
-    //     if (currentUser.password !== user.password) {
-    //         responseObj.success = false;
-    //         responseObj.message = 'Wrong password.'
-    //     }
-    // } else {
-    //     responseObj.success = false;
-    //     responseObj.message = 'Wrong username.'
-    // }
 
     status = await login(currentUser, status);
 

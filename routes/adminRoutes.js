@@ -1,5 +1,6 @@
 const express = require('express');
-const { checkProperty, login, checkAdmin } = require('../utils.js');
+const { checkProperty, login } = require('../utils/general.js');
+const { checkAdmin, checkSchema } = require('../utils/admin.js')
 const router = express.Router();
 
 // Logga in
@@ -17,7 +18,7 @@ router.post('/login', checkProperty('username'), checkProperty('password'), chec
 
 // Lägga till produkt
 router.post('/addProduct', checkSchema, (req, res) => {
-
+    res.send(req.body);
 });
 
 module.exports = router;
