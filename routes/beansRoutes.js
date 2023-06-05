@@ -5,7 +5,7 @@ const { checkProperty, plannedDelivery, isDelivered, checkDelivery, orderValidat
 const { updateUserOrders, findUsers } = require('../users/users.js');
 const router = express.Router();
 
-router.get('/api/beans', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const menu = await getMenu();
         return res.json(menu);
@@ -15,7 +15,7 @@ router.get('/api/beans', async (req, res) => {
 });
 
 // Skicka order
-router.post('/api/beans/order', checkProperty('userID'), checkProperty('order'), orderValidation, async (req, res) => {
+router.post('/order', checkProperty('userID'), checkProperty('order'), orderValidation, async (req, res) => {
     const userID = req.body.userID;
     const date = new Date().toLocaleString();
     const newOrder = {
@@ -42,7 +42,7 @@ router.post('/api/beans/order', checkProperty('userID'), checkProperty('order'),
 });
 
 // Hämta status för order
-router.get('/api/beans/order/status', checkProperty('userID'), checkProperty('orderNumber'), async (req, res) => {
+router.get('/order/status', checkProperty('userID'), checkProperty('orderNumber'), async (req, res) => {
     const userID = req.body.userID;
     const orderNumber = req.body.orderNumber;
     const [ user ] = await findUsers('_id', userID);
