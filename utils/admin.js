@@ -9,10 +9,14 @@ function verifyAdmin(req, res, next) {
     const token = req.headers.authorization.replace('Bearer ', '');
     try {
         const data = jwt.verify(token, '1234');
-        console.log(data);
-        next();
+        if (data.role === 'admin') {
+            next();
+        } else {
+            return res.status(400).json({ message: 'Please make sure that user has role: admin.'})
+        }
+
     } catch (error) {
-        res.send(401).json({ error: error, message: 'Not authorized, invalid token.'});
+        return res.status(401).json({ message: 'Not authorized, invalid token.'});
     }
 }
 
@@ -25,8 +29,8 @@ async function addJWT(req, res, next) {
         admins.map(admin => {
             if (admin.username === req.body.username) {
                 isAdmin = true;
-                // Applicera jwt
-                res.locals.token = jwt.sign({ id: admin._id }, '1234', {
+                // Applicera jwt med id och role
+                res.locals.token = jwt.sign({ id: admin._id, role: admin.role }, '1234', {
                     expiresIn: "2h"
                 });
             }
