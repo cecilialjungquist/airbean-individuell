@@ -11,6 +11,7 @@ router.post('/login', checkProperty('username'), checkProperty('password'), chec
         message: 'Login ok.'
     }
     status = await login(currentUser, status);
+    // Lagra token för att visa i res
     status.token = res.locals.token;
 
     return res.send(status);
@@ -18,7 +19,8 @@ router.post('/login', checkProperty('username'), checkProperty('password'), chec
 
 // Lägga till produkt
 router.post('/addProduct', checkSchema, (req, res) => {
-    res.send(req.body);
+    const newProduct = res.locals.newProduct;
+    return res.send(newProduct);
 });
 
 module.exports = router;

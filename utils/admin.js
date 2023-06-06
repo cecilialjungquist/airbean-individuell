@@ -24,20 +24,39 @@ async function checkAdmin(req, res, next) {
 }
 
 function checkSchema(req, res, next) {
-    const newObject = {
-        id: req.body.id,
-        title: req.body.title,
-        desc: req.body.desc,
-        price: req.body.price,
-    }
     if (req.body.id && req.body.title && req.body.desc && req.body.price) {
-        // Kolla om det är rätt datatyp?
-        next();
+        const { id, title, desc, price } = req.body;
+
+        // Kolla om det är rätt datatyp
+        let checkedValues = [
+            checkDatatype(id, 'string', 10),
+            checkDatatype(title, 'string', 2),
+            checkDatatype(desc, 'string', 10),
+            checkDatatype(price, 'number', 0)
+        ];
+
+        if (checkedValues.every(value => value === true)) {
+            res.locals.newProduct = {
+                id,
+                title,
+                desc,
+                price,
+            }
+            next();
+        } else {
+            return res.status(400).json({ message: 'Invalid data.'})
+        }
     } else {
         return res.status(400).json({ message: 'Missing data.'})
     }
+}
 
-    
+function checkDatatype(variableToCheck, expectedDatatype, requiredMinLength) {
+    if (typeof variableToCheck === expectedDatatype && variableToCheck.toString().length > requiredMinLength) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 module.exports = {
