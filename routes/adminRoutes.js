@@ -1,7 +1,7 @@
 const express = require('express');
 const { checkProperty, login } = require('../utils/general.js');
 const { addJWT, checkSchema, verifyAdmin } = require('../utils/admin.js');
-const { addMenuItem, getMenu } = require('../menu/menu.js');
+const { addMenuItem, getMenu, findMenuItem, deleteMenuItem } = require('../menu/menu.js');
 const router = express.Router();
 
 // Logga in
@@ -34,11 +34,16 @@ router.post('/addProduct', checkSchema, verifyAdmin, async (req, res) => {
 });
 
 // Ta bort produkt
-// router.delete('/deleteProduct', checkProperty('id'), verifyAdmin, async (req, res) => {
-//     const id = req.body.id;
-
-
-
-// });
+router.delete('/deleteProduct', checkProperty('id'), verifyAdmin, async (req, res) => {
+    const id = req.body.id;
+    const menuItem = await findMenuItem(id);
+   
+    if (menuItem) {
+        deleteMenuItem(id);
+        return res.json({ message: 'Product deleted.', product: menuItem })
+    } else {
+        return res.status(404).json({ message: 'This product cannot be deleted because it does not exist in the database.'})
+    }
+});
 
 module.exports = router;

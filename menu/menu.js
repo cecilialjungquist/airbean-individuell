@@ -17,8 +17,13 @@ function addMenuItem(item) {
     menuDB.insert(item);
 }
 
+function deleteMenuItem(id) {
+    menuDB.remove({ id: id });
+}
+
 module.exports = {
     getMenu,
     findMenuItem,
-    addMenuItem
+    addMenuItem,
+    deleteMenuItem
 }
