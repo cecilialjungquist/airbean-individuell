@@ -13,7 +13,12 @@ async function findMenuItem(id) {
     return await menuDB.findOne({ id: id });
 }
 
+function addMenuItem(item) {
+    menuDB.insert(item);
+}
+
 module.exports = {
     getMenu,
-    findMenuItem
+    findMenuItem,
+    addMenuItem
 }

@@ -36,12 +36,14 @@ function checkSchema(req, res, next) {
         ];
 
         if (checkedValues.every(value => value === true)) {
+            // Lagra och skicka vidare värden till nästa funktion
             res.locals.newProduct = {
                 id,
                 title,
                 desc,
                 price,
             }
+
             next();
         } else {
             return res.status(400).json({ message: 'Invalid data.'})
