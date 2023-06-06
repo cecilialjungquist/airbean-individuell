@@ -21,9 +21,14 @@ function deleteMenuItem(id) {
     menuDB.remove({ id: id });
 }
 
+function updateMenuItem(updatedMenuItem) {
+    menuDB.update({ id: updatedMenuItem.id }, updatedMenuItem);
+}
+
 module.exports = {
     getMenu,
     findMenuItem,
     addMenuItem,
-    deleteMenuItem
+    deleteMenuItem,
+    updateMenuItem
 }
