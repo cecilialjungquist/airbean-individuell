@@ -1,8 +1,5 @@
 const nedb = require('nedb-promise');
 const usersDB = new nedb({ filename: 'users.db', autoload: true });
-const { createDB } = require('../createDB.js');
-
-// createDB('/users/users.json', usersDB);
 
 function updateUserOrders(userID, newOrder) {
     usersDB.update({ _id: userID }, { $push: { orders: newOrder } });

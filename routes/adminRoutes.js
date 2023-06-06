@@ -1,11 +1,11 @@
 const express = require('express');
 const { checkProperty, login } = require('../utils/general.js');
-const { addJWT, checkSchema, verifyAdmin } = require('../utils/admin.js');
-const { addMenuItem, getMenu, findMenuItem, deleteMenuItem, updateMenuItem } = require('../menu/menu.js');
+const { addJWTAdmin, checkSchema, verifyAdmin } = require('../utils/admin.js');
+const { addMenuItem, getMenu, findMenuItem, deleteMenuItem, updateMenuItem } = require('../utils/menuDB.js');
 const router = express.Router();
 
 // Logga in
-router.post('/login', checkProperty('username'), checkProperty('password'), checkProperty('role'), addJWT, async (req, res) => {
+router.post('/login', checkProperty('username'), checkProperty('password'), checkProperty('role'), addJWTAdmin, async (req, res) => {
     const currentUser = req.body;
     let status = {
         success: true,
@@ -62,7 +62,7 @@ router.put('/updateProduct', checkProperty('id'), checkProperty('update'), verif
         });
         menuItem.modifiedAt = new Date().toLocaleString();
         updateMenuItem(menuItem);
-        
+
         return res.json({ message: 'Product updated.', product: menuItem });
     } else {
         return res.status(404).json({ message: 'This product cannot be modified because it does not exist in the database.'})
