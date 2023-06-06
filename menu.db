@@ -1,4 +1,4 @@
-{"id":"coffee-220dodpzmg","title":"Caffè Doppio","desc":"Bryggd på månadens bönor.","price":49,"_id":"1w82cfDNWYVuCprT"}
+{"id":"coffee-220dodpzmg","title":"Caffè Doppio","desc":"Bryggd på colombianska bönor.","price":60,"_id":"1w82cfDNWYVuCprT","modifiedAt":"2023-06-06 21:19:36"}
 {"id":"pastry-vkzh17ct2r","title":"Semla","desc":"En fastlagsbulle i sin rätta form.","price":50,"_id":"6h1lVdiEwXoERjut"}
 {"id":"coffee-0lp6ter3bh","title":"Kaffe Latte","desc":"Bryggd på månadens bönor.","price":54,"_id":"91Yb7TXACqQjKqno"}
 {"id":"coffee-4pdksmrkfa","title":"Cappuccino","desc":"Bryggd på månadens bönor.","price":49,"_id":"Cj2XtFNUhr80La8q"}
@@ -6,6 +6,3 @@
 {"id":"coffee-m2h37k2mnh","title":"Latte Macchiato","desc":"Bryggd på månadens bönor.","price":49,"_id":"ICwxNmZtNhXfjnGO"}
 {"id":"pastry-db3gfsuqpr","title":"Gustav Adolfsbakelse","desc":"En kunglig bakelse.","price":50,"_id":"JMjB4jD3q588DSvx"}
 {"id":"coffee-vxig26my4y","title":"Bryggkaffe","desc":"Bryggd på månadens bönor.","price":39,"_id":"zpxxK61dxQXjQ5Of"}
-{"id":"12345678933310","title":"Chockladpaj","desc":"Mörk choklad och mandel.","price":30,"createdAt":"2023-06-06 21:19:19","_id":"i3ldPTs5EOpT1Idw"}
-{"$$deleted":true,"_id":"i3ldPTs5EOpT1Idw"}
-{"id":"coffee-220dodpzmg","title":"Caffè Doppio","desc":"Bryggd på colombianska bönor.","price":60,"_id":"1w82cfDNWYVuCprT","modifiedAt":"2023-06-06 21:19:36"}
