@@ -1,5 +1,5 @@
-const { findMenuItem } = require('../menu/menu.js');
-const { findUsers } = require('../users/users.js');
+const { findMenuItem } = require('./menuDB.js');
+const { findUsers } = require('./usersDB.js');
 
 function checkProperty(property) {
     return function (req, res, next) {

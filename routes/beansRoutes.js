@@ -1,8 +1,8 @@
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
-const { getMenu } = require('../menu/menu.js');
+const { getMenu } = require('../utils/menuDB.js');
 const { checkProperty, plannedDelivery, isDelivered, checkDelivery, orderValidation } = require('../utils/general.js');
-const { updateUserOrders, findUsers } = require('../users/users.js');
+const { updateUserOrders, findUsers } = require('../utils/usersDB.js');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
