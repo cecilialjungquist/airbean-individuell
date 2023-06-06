@@ -1,11 +1,11 @@
 const express = require('express');
 const { checkProperty, login } = require('../utils/general.js');
-const { checkAdmin, checkSchema } = require('../utils/admin.js');
+const { addJWT, checkSchema } = require('../utils/admin.js');
 const { addMenuItem, getMenu } = require('../menu/menu.js');
 const router = express.Router();
 
 // Logga in
-router.post('/login', checkProperty('username'), checkProperty('password'), checkProperty('role'), checkAdmin, async (req, res) => {
+router.post('/login', checkProperty('username'), checkProperty('password'), checkProperty('role'), addJWT, async (req, res) => {
     const currentUser = req.body;
     let status = {
         success: true,
@@ -28,7 +28,7 @@ router.post('/addProduct', checkSchema, async (req, res) => {
         return res.status(400).json({ message: 'Product already exists.'})
     } else {
         addMenuItem(newProduct);
-        return res.status(401).json({ message: 'Product added.', product: newProduct });
+        return res.status(201).json({ message: 'Product added.', product: newProduct });
     }
 });
 

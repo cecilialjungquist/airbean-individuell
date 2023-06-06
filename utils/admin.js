@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 const { findUsers } = require('../users/users.js');
 
-// Kollar om användare är admin
-async function checkAdmin(req, res, next) {
+// Kollar om användare är admin och adderar JWT
+async function addJWT(req, res, next) {
     if (req.body.role === 'admin') {
         const admins = await findUsers('role', 'admin');
         let isAdmin = false;
@@ -62,6 +62,6 @@ function checkDatatype(variableToCheck, expectedDatatype, requiredMinLength) {
 }
 
 module.exports = {
-    checkAdmin,
+    addJWT,
     checkSchema
 }
