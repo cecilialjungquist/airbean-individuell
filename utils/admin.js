@@ -1,6 +1,21 @@
 const jwt = require('jsonwebtoken');
 const { findUsers } = require('../users/users.js');
 
+function verifyAdmin(req, res, next) {
+    if (!req.headers.authorization) {
+        return res.status(401).json({ message: 'No authorization header found.' });
+    }
+
+    const token = req.headers.authorization.replace('Bearer ', '');
+    try {
+        const data = jwt.verify(token, '1234');
+        console.log(data);
+        next();
+    } catch (error) {
+        res.send(401).json({ error: error, message: 'Not authorized, invalid token.'});
+    }
+}
+
 // Kollar om användare är admin och adderar JWT
 async function addJWT(req, res, next) {
     if (req.body.role === 'admin') {
@@ -62,6 +77,7 @@ function checkDatatype(variableToCheck, expectedDatatype, requiredMinLength) {
 }
 
 module.exports = {
+    verifyAdmin,
     addJWT,
     checkSchema
 }

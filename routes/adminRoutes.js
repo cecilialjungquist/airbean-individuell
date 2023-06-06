@@ -1,6 +1,6 @@
 const express = require('express');
 const { checkProperty, login } = require('../utils/general.js');
-const { addJWT, checkSchema } = require('../utils/admin.js');
+const { addJWT, checkSchema, verifyAdmin } = require('../utils/admin.js');
 const { addMenuItem, getMenu } = require('../menu/menu.js');
 const router = express.Router();
 
@@ -19,7 +19,7 @@ router.post('/login', checkProperty('username'), checkProperty('password'), chec
 });
 
 // Lägga till produkt
-router.post('/addProduct', checkSchema, async (req, res) => {
+router.post('/addProduct', checkSchema, verifyAdmin, async (req, res) => {
     const newProduct = res.locals.newProduct;
     const existingProducts = await getMenu();
 
