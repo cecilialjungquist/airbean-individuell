@@ -27,9 +27,18 @@ router.post('/addProduct', checkSchema, verifyAdmin, async (req, res) => {
     if (existingProducts.some(item => item.id === newProduct.id)) {
         return res.status(400).json({ message: 'Product already exists.'})
     } else {
+        newProduct.createdAt = new Date().toLocaleString();
         addMenuItem(newProduct);
         return res.status(201).json({ message: 'Product added.', product: newProduct });
     }
 });
+
+// Ta bort produkt
+// router.delete('/deleteProduct', checkProperty('id'), verifyAdmin, async (req, res) => {
+//     const id = req.body.id;
+
+
+
+// });
 
 module.exports = router;
