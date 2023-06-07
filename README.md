@@ -48,7 +48,7 @@ Exempel på request body:
 }`
 
 ### Logga in
-` GET /api/user/login `
+` POST /api/user/login `
 
 Exempel på request body:
 `{
@@ -71,6 +71,50 @@ Exempel på request body:
 `{
 	"userID": "11223344",
 	"orderNumber": "55667788"
+}`
+
+### Logga in admin
+` POST /api/admin/login `
+
+Exempel på request body:
+`{
+	"username": "username",
+	"password": "password",
+	"role": "admin"
+}`
+
+### Addera produkt till menyn
+` POST /api/admin/addProduct `
+` HEADERS Authorization, Bearer + token `
+
+Exempel på request body:
+`{
+	"id": "id1234567890",
+	"title": "title",
+	"desc": "Lorem ipsum dolor.",
+	"price": 20
+}`
+
+### Ta bort produkt från menyn
+` DELETE /api/admin/deleteProduct `
+` HEADERS Authorization, Bearer + token `
+
+Exempel på request body:
+`{
+	"id": "id1234567890"
+}`
+
+### Uppdatera befintlig produkt i menyn
+` PUT /api/admin/updateProduct `
+` HEADERS Authorization, Bearer + token `
+
+Exempel på request body:
+`{
+	"id": "id1234567890",
+	"update": {
+		"title": "New Title",
+		"price": 34
+	}
 }`
 
 ## Uppgiftens krav på funktionalitet:
