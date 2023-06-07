@@ -31,12 +31,20 @@ router.post('/order', checkProperty('userID'), checkProperty('order'), orderVali
     if (user) {
         if (req.body.order.length > 0) {
             updateUserOrders(userID, newOrder);
-            return res.json(newOrder);
+            return res.json({
+                success: true,
+                newOrder: newOrder
+            });
         } else {
-            return res.status(400).json({ message: 'Cannot place an empty order.'});
+            return res.status(400).json({ 
+                success: false,
+                message: 'Cannot place an empty order.'});
         }
     } else {
-        return res.status(404).json({ message: 'User not found.'});
+        return res.status(404).json({ 
+            success: false,
+            message: 'User not found.'
+        });
     }
 
 });

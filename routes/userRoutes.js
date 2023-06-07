@@ -11,7 +11,7 @@ router.post('/signup', checkProperty('username'), checkProperty('password'), asy
         role: 'user',
         orders: []
     }
-    let responseObj = {
+    let status = {
         success: true,
         message: 'Signup ok.'
     }
@@ -20,16 +20,16 @@ router.post('/signup', checkProperty('username'), checkProperty('password'), asy
 
     users.forEach(user => {
         if (user.username === newUser.username) {
-            responseObj.success = false;
-            responseObj.message = 'User already exists.'
+            status.success = false;
+            status.message = 'User already exists.';
         }
     });
 
-    if (responseObj.success) {
+    if (status.success) {
         createUser(newUser);
     }
 
-    return res.json(responseObj);
+    return res.json(status);
 });
 
 // Logga in
@@ -49,16 +49,16 @@ router.post('/login', checkProperty('username'), checkProperty('password'), asyn
 router.get('/history', checkProperty('userID'), async (req, res) => {
     const userID = req.body.userID;
     const [ user ] = await findUsers('_id', userID);
-    const responseObj = {
+    const status = {
         message: 'Previous orders',
     }
 
     if (user) {
-        responseObj.orders = user.orders;
-        return res.json(responseObj);
+        status.orders = user.orders;
+        return res.json(status);
     } else {
-        responseObj.message = 'Invalid userID.'
-        return res.status(400).json(responseObj);
+        status.message = 'Invalid userID.'
+        return res.status(400).json(status);
     }
 
 });

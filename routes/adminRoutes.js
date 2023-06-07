@@ -25,11 +25,15 @@ router.post('/addProduct', checkSchema, verifyAdmin, async (req, res) => {
 
     // Kolla om produkten redan finns
     if (existingProducts.some(item => item.id === newProduct.id)) {
-        return res.status(400).json({ message: 'Product already exists.' })
+        return res.status(400).json({ success: false, message: 'Product already exists.' })
     } else {
         newProduct.createdAt = new Date().toLocaleString();
         addMenuItem(newProduct);
-        return res.status(201).json({ message: 'Product added.', product: newProduct });
+        return res.status(201).json({ 
+            success: true, 
+            message: 'Product added.', 
+            product: newProduct 
+        });
     }
 });
 
@@ -40,9 +44,16 @@ router.delete('/deleteProduct', checkProperty('id'), verifyAdmin, async (req, re
 
     if (menuItem) {
         deleteMenuItem(id);
-        return res.json({ message: 'Product deleted.', product: menuItem })
+        return res.json({ 
+            success: true,
+            message: 'Product deleted.', 
+            product: menuItem 
+        })
     } else {
-        return res.status(404).json({ message: 'This product cannot be deleted because it does not exist in the database.' })
+        return res.status(404).json({ 
+            success: false,
+            message: 'This product cannot be deleted because it does not exist in the database.' 
+        })
     }
 });
 
@@ -63,9 +74,16 @@ router.put('/updateProduct', checkProperty('id'), checkProperty('update'), verif
         menuItem.modifiedAt = new Date().toLocaleString();
         updateMenuItem(menuItem);
 
-        return res.json({ message: 'Product updated.', product: menuItem });
+        return res.json({ 
+            success: true,
+            message: 'Product updated.', 
+            product: menuItem 
+        });
     } else {
-        return res.status(404).json({ message: 'This product cannot be modified because it does not exist in the database.'})
+        return res.status(404).json({ 
+            success: false,
+            message: 'This product cannot be modified because it does not exist in the database.'
+        })
     }
 
 });
