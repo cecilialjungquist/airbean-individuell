@@ -3,7 +3,7 @@
 I den individuella delen av Airbean så ska du skapa ett admin-gränssnitt för att hantera menyn. Det ska gå och lägga till, ta bort och modifiera produkter samt lägga till kampanjerbjudanden.
 Dessa endpoints ska vara skyddade med en jwt token som valideras vid anrop.
 
-## Fördefinierade konton att testa
+## Fördefinierade konton att testa i req.body
 
 Admin
 `{
