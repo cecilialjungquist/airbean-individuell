@@ -6,3 +6,6 @@
 {"id":"coffee-m2h37k2mnh","title":"Latte Macchiato","desc":"Bryggd på månadens bönor.","price":49,"_id":"ICwxNmZtNhXfjnGO"}
 {"id":"pastry-db3gfsuqpr","title":"Gustav Adolfsbakelse","desc":"En kunglig bakelse.","price":50,"_id":"JMjB4jD3q588DSvx"}
 {"id":"coffee-vxig26my4y","title":"Bryggkaffe","desc":"Bryggd på månadens bönor.","price":39,"_id":"zpxxK61dxQXjQ5Of"}
+{"id":"1234567896786833310","title":"Toscakaka","desc":"En smak av Italien.","price":34,"createdAt":"2023-06-07 08:53:45","_id":"5CySlcdo9Vcvc747"}
+{"$$deleted":true,"_id":"5CySlcdo9Vcvc747"}
+{"id":"coffee-220dodpzmg","title":"Caffè Doppio","desc":"Bryggd på colombianska bönor.","price":40,"_id":"1w82cfDNWYVuCprT","modifiedAt":"2023-06-07 08:54:49"}

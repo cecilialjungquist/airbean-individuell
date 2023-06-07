@@ -1,6 +1,7 @@
 const express = require('express');
-const { checkProperty, login } = require('../utils/general.js');
-const { addJWTAdmin, checkSchema, verifyAdmin } = require('../utils/admin.js');
+const { checkSchema, checkProperty } = require('../middleware/dataValidation.js');
+const { login } = require('../utils/general.js');
+const { addJWTAdmin, verifyAdmin } = require('../middleware/admin.js');
 const { addMenuItem, getMenu, findMenuItem, deleteMenuItem, updateMenuItem } = require('../utils/menuDB.js');
 const router = express.Router();
 

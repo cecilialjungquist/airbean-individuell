@@ -1,7 +1,8 @@
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
 const { getMenu } = require('../utils/menuDB.js');
-const { checkProperty, plannedDelivery, isDelivered, checkDelivery, orderValidation } = require('../utils/general.js');
+const { checkProperty, orderValidation } = require('../middleware/dataValidation.js');
+const { plannedDelivery, isDelivered, checkDelivery } = require('../utils/delivery.js');
 const { updateUserOrders, findUsers } = require('../utils/usersDB.js');
 const router = express.Router();
 
@@ -58,20 +59,24 @@ router.get('/order/status', checkProperty('userID'), checkProperty('orderNumber'
 
     // Kolla om user och user.orders finns
     if (user && user.orders) {
-        user.orders.forEach(order => {
+        const found = user.orders.some(order => {
             if (order.orderNumber === orderNumber) {
                 status.delivered = isDelivered(order);
                 status.message = 'Order has been delivered.';
-                
+        
                 if (!status.delivered) {
                     const minutes = checkDelivery(order);
                     status.message = `Will be delivered in ${minutes} min.`;
                 }
-
-            } else {
-                status.message = 'The ordernumber does not exists.';
+                return true;
             }
+            return false;
         });
+        
+        if (!found) {
+            status.message = 'The ordernumber does not exists.';
+        }
+        
     } else {
         status.message = 'This user does not exists.';
     }

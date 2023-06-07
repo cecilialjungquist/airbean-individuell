@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { findUsers } = require('./usersDB.js');
+const { findUsers } = require('../utils/usersDB.js');
 
 function verifyAdmin(req, res, next) {
     if (!req.headers.authorization) {
@@ -20,7 +20,7 @@ function verifyAdmin(req, res, next) {
     }
 }
 
-// Kollar om användare är admin och adderar JWT
+// Kolla om användare är admin och addera isf JWT
 async function addJWTAdmin(req, res, next) {
     if (req.body.role === 'admin') {
         const admins = await findUsers('role', 'admin');
@@ -42,46 +42,7 @@ async function addJWTAdmin(req, res, next) {
     }
 }
 
-function checkSchema(req, res, next) {
-    if (req.body.id && req.body.title && req.body.desc && req.body.price) {
-        const { id, title, desc, price } = req.body;
-
-        // Kolla om det är rätt datatyp
-        let checkedValues = [
-            checkDatatype(id, 'string', 10),
-            checkDatatype(title, 'string', 2),
-            checkDatatype(desc, 'string', 10),
-            checkDatatype(price, 'number', 0)
-        ];
-
-        if (checkedValues.every(value => value === true)) {
-            // Lagra och skicka vidare värden till nästa funktion
-            res.locals.newProduct = {
-                id,
-                title,
-                desc,
-                price,
-            }
-
-            next();
-        } else {
-            return res.status(400).json({ message: 'Invalid data.'})
-        }
-    } else {
-        return res.status(400).json({ message: 'Missing data.'})
-    }
-}
-
-function checkDatatype(variableToCheck, expectedDatatype, requiredMinLength) {
-    if (typeof variableToCheck === expectedDatatype && variableToCheck.toString().length > requiredMinLength) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 module.exports = {
     verifyAdmin,
     addJWTAdmin,
-    checkSchema
 }
