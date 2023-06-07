@@ -1,26 +1,30 @@
 const express = require('express');
 const { checkSchema, checkProperty } = require('../middleware/dataValidation.js');
-const { login } = require('../utils/general.js');
+const { login } = require('../utils/account.js');
 const { addJWTAdmin, verifyAdmin } = require('../middleware/admin.js');
 const { addMenuItem, getMenu, findMenuItem, deleteMenuItem, updateMenuItem } = require('../utils/menuDB.js');
 const router = express.Router();
 
-// Logga in
 router.post('/login', checkProperty('username'), checkProperty('password'), checkProperty('role'), addJWTAdmin, async (req, res) => {
+    // BODY: { username, password, role }
+    // TODO: Logga in och returnera token.
+
     const currentUser = req.body;
     let status = {
         success: true,
         message: 'Login ok.'
     }
     status = await login(currentUser, status);
-    // Lagra token för att visa i res.send
     status.token = res.locals.token;
 
     return res.json(status);
 });
 
-// Lägga till produkt
 router.post('/addProduct', checkSchema, verifyAdmin, async (req, res) => {
+    // BODY: { id, title, desc, price }
+    // HEADERS: Authorization, Bearer token
+    // TODO: Addera ny produkt (om den inte redan finns)
+    
     const newProduct = res.locals.newProduct;
     const existingProducts = await getMenu();
 
@@ -38,8 +42,11 @@ router.post('/addProduct', checkSchema, verifyAdmin, async (req, res) => {
     }
 });
 
-// Ta bort produkt
 router.delete('/deleteProduct', checkProperty('id'), verifyAdmin, async (req, res) => {
+    // BODY: { id }
+    // HEADERS: Authorization, Bearer token
+    // TODO: Ta bort produkt (om den finns)
+
     const id = req.body.id;
     const menuItem = await findMenuItem(id);
 
@@ -58,8 +65,11 @@ router.delete('/deleteProduct', checkProperty('id'), verifyAdmin, async (req, re
     }
 });
 
-// Uppdatera produkt
 router.put('/updateProduct', checkProperty('id'), checkProperty('update'), verifyAdmin, async (req, res) => {
+    // BODY: { id, update }
+    // HEADERS: Authorization, Bearer token
+    // TODO: Hämta produkt med angivet id och uppdatera egenskaper mot update-objektet i body.
+
     const id = req.body.id;
     const update = req.body.update;
     const menuItem = await findMenuItem(id);

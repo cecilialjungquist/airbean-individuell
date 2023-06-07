@@ -1,7 +1,7 @@
 const express = require('express');
 const { findUsers, createUser } = require('../utils/usersDB.js');
 const { checkProperty } = require('../middleware/dataValidation.js');
-const { login } = require('../utils/general.js');
+const { login } = require('../utils/account.js');
 const router = express.Router();
 
 // Skapa konto
