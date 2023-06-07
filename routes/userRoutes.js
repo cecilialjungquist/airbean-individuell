@@ -1,14 +1,14 @@
 const express = require('express');
 const { findUsers, createUser } = require('../utils/usersDB.js');
 const { checkProperty } = require('../middleware/dataValidation.js');
-const { login } = require('../utils/account.js');
+const { login, hashedPassword } = require('../utils/account.js');
 const router = express.Router();
 
 // Skapa konto
 router.post('/signup', checkProperty('username'), checkProperty('password'), async (req, res) => {
     const newUser = {
         username: req.body.username,
-        password: req.body.password,
+        hashedPassword: hashedPassword(req.body.password),
         role: 'user',
         orders: []
     }
