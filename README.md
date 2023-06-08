@@ -27,7 +27,7 @@ User
 
 Exempel på request body:
 `{
-	"userID": "34T10vzNa9SYOFW9",
+	"userID": "S436xNtMYygWkBPM",
 	"order": [
 		{
 			"id": "coffee-m2h37k2mnh"
@@ -43,8 +43,8 @@ Exempel på request body:
 
 Exempel på request body:
 `{
-	"username": "username",
-	"password": "password1234"
+	"username": "ross",
+	"password": "rachel4ever"
 }`
 
 ### Logga in
@@ -52,8 +52,8 @@ Exempel på request body:
 
 Exempel på request body:
 `{
-	"username": "username",
-	"password": "password1234"
+	"username": "rachel",
+	"password": "imAShoe"
 }`
 
 ### Hämta orderhistorik
@@ -61,7 +61,7 @@ Exempel på request body:
 
 Exempel på request body:
 `{
-	"userID": "11223344"
+	"userID": "S436xNtMYygWkBPM"
 }`
 
 ### Hämta orderstatus
@@ -69,8 +69,8 @@ Exempel på request body:
 
 Exempel på request body:
 `{
-	"userID": "11223344",
-	"orderNumber": "55667788"
+	"userID": "S436xNtMYygWkBPM",
+	"orderNumber": "orderNumberXXXX"
 }`
 
 ### Logga in admin
@@ -78,8 +78,8 @@ Exempel på request body:
 
 Exempel på request body:
 `{
-	"username": "username",
-	"password": "password",
+	"username": "gunther",
+	"password": "iHateThisJob"
 	"role": "admin"
 }`
 
@@ -89,8 +89,8 @@ Exempel på request body:
 
 Exempel på request body:
 `{
-	"id": "id1234567890",
-	"title": "title",
+	"id": "idXXXXXXXXXX",
+	"title": "New Product",
 	"desc": "Lorem ipsum dolor.",
 	"price": 20
 }`
@@ -101,7 +101,7 @@ Exempel på request body:
 
 Exempel på request body:
 `{
-	"id": "id1234567890"
+	"id": "idXXXXXXXXXX"
 }`
 
 ### Uppdatera befintlig produkt i menyn
@@ -110,7 +110,7 @@ Exempel på request body:
 
 Exempel på request body:
 `{
-	"id": "id1234567890",
+	"id": "idXXXXXXXXXX",
 	"update": {
 		"title": "New Title",
 		"price": 34
