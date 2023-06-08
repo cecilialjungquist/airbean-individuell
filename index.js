@@ -1,9 +1,8 @@
-const express = require('express');
-
 const beansRoutes = require('./routes/beansRoutes.js');
 const userRoutes = require('./routes/userRoutes.js');
 const adminRoutes = require('./routes/adminRoutes.js');
 
+const express = require('express');
 const app = express();
 const PORT = 1337;
 
