@@ -143,8 +143,8 @@ Uppnås inte kraven ovan ska ett passande felmeddelande skickas tillbaka.
 	- Kampanjpris för denna kombination (ex. 40 kr totalt)
 
 ## För Godkänt:
-Uppnår alla krav på funktionalitet.
+* Uppnår alla krav på funktionalitet.
 
 ## För Väl Godkänt:
-Använder sig av JSON web token för att returnera en token som innehåller användarens roll och som används för att sedan kontrollera access till routes enligt ovan.
-Använder sig av Bcrypt.js för att kryptera lösenord vid skapandet av konto. Här är det fördelaktigt att lägga till funktionalitet för att skapa konto.
+* Använder sig av JSON web token för att returnera en token som innehåller användarens roll och som används för att sedan kontrollera access till routes enligt ovan.
+* Använder sig av Bcrypt.js för att kryptera lösenord vid skapandet av konto. Här är det fördelaktigt att lägga till funktionalitet för att skapa konto.
