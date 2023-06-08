@@ -106,6 +106,7 @@ router.post('/addCampaign', checkProperty('products'), checkProperty('campaignPr
     // TODO: Addera nytt kampanjerbjudande i campaign.db
 
     const newCampaign = addCampaign(req.body.products, req.body.campaignPrice);
+    
     return res.status(201).json({
         success: true,
         message: 'Added campaign:',
