@@ -85,7 +85,7 @@ Exempel på request body:
 
 ### Addera produkt till menyn
 ` POST /api/admin/addProduct `
-` HEADERS Authorization, Bearer + token `
+` HEADERS Authorization, Bearer token `
 
 Exempel på request body:
 `{
@@ -97,7 +97,7 @@ Exempel på request body:
 
 ### Ta bort produkt från menyn
 ` DELETE /api/admin/deleteProduct `
-` HEADERS Authorization, Bearer + token `
+` HEADERS Authorization, Bearer token `
 
 Exempel på request body:
 `{
@@ -106,7 +106,7 @@ Exempel på request body:
 
 ### Uppdatera befintlig produkt i menyn
 ` PUT /api/admin/updateProduct `
-` HEADERS Authorization, Bearer + token `
+` HEADERS Authorization, Bearer token `
 
 Exempel på request body:
 `{
@@ -115,6 +115,19 @@ Exempel på request body:
 		"title": "New Title",
 		"price": 34
 	}
+}`
+
+### Lägg till kampanj 
+` POST /api/admin/addCampaign `
+` HEADERS Authorization, Bearer token `
+
+Exempel på request body:
+`{
+	"products": [
+		{"id": "coffee-4pdksmrkfa"},
+		{"id": "coffee-4pdksmrkfa"}
+	],
+	"campaignPrice": 30
 }`
 
 ## Uppgiftens krav på funktionalitet:
