@@ -1,12 +1,13 @@
 const express = require('express');
-const { checkSchema, checkProperty } = require('../middleware/dataValidation.js');
+const { checkSchema, checkProperty, campaignValidation } = require('../middleware/dataValidation.js');
 const { login } = require('../utils/account.js');
 const { addJWTAdmin, verifyAdmin } = require('../middleware/admin.js');
 const { addMenuItem, getMenu, findMenuItem, deleteMenuItem, updateMenuItem } = require('../utils/menuDB.js');
+const { addCampaign } = require('../utils/campaignsDB.js');
 const router = express.Router();
 
 router.post('/login', checkProperty('username'), checkProperty('password'), checkProperty('role'), addJWTAdmin, async (req, res) => {
-    // BODY: { username, password, role }
+    // BODY: { username (string), password (string), role (string) }
     // TODO: Logga in och returnera token.
 
     const currentUser = req.body;
@@ -21,7 +22,7 @@ router.post('/login', checkProperty('username'), checkProperty('password'), chec
 });
 
 router.post('/addProduct', checkSchema, verifyAdmin, async (req, res) => {
-    // BODY: { id, title, desc, price }
+    // BODY: { id (string), title (string), desc (string), price (number) }
     // HEADERS: Authorization, Bearer token
     // TODO: Addera ny produkt (om den inte redan finns)
     
@@ -43,7 +44,7 @@ router.post('/addProduct', checkSchema, verifyAdmin, async (req, res) => {
 });
 
 router.delete('/deleteProduct', checkProperty('id'), verifyAdmin, async (req, res) => {
-    // BODY: { id }
+    // BODY: { id (string) }
     // HEADERS: Authorization, Bearer token
     // TODO: Ta bort produkt (om den finns)
 
@@ -66,7 +67,7 @@ router.delete('/deleteProduct', checkProperty('id'), verifyAdmin, async (req, re
 });
 
 router.put('/updateProduct', checkProperty('id'), checkProperty('update'), verifyAdmin, async (req, res) => {
-    // BODY: { id, update }
+    // BODY: { id (string), update (object) }
     // HEADERS: Authorization, Bearer token
     // TODO: Hämta produkt med angivet id och uppdatera egenskaper mot update-objektet i body.
 
@@ -97,6 +98,20 @@ router.put('/updateProduct', checkProperty('id'), checkProperty('update'), verif
         })
     }
 
+});
+
+router.post('/addCampaign', checkProperty('products'), checkProperty('campaignPrice'), verifyAdmin, campaignValidation, (req, res) => {
+    // BODY: { products (array of objects with id key (string) ), campaignPrice (number) }
+    // HEADERS: Authorization, Bearer token
+    // TODO: Addera nytt kampanjerbjudande i campaign.db
+
+    const newCampaign = addCampaign(req.body.products, req.body.campaignPrice);
+    
+    return res.status(201).json({
+        success: true,
+        message: 'Added campaign:',
+        campaign: newCampaign
+    });
 });
 
 module.exports = router;

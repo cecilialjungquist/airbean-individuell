@@ -23,10 +23,10 @@ function checkSchema(req, res, next) {
 
             next();
         } else {
-            return res.status(400).json({ message: 'Invalid data.'})
+            return res.status(400).json({ message: 'Invalid data.' })
         }
     } else {
-        return res.status(400).json({ message: 'Missing data.'})
+        return res.status(400).json({ message: 'Missing data.' })
     }
 }
 
@@ -70,8 +70,36 @@ async function orderValidation(req, res, next) {
     next();
 }
 
+async function campaignValidation(req, res, next) {
+    const products = req.body.products;
+
+    // Kolla om produkter finns i menyn
+    const checkProducts = products.map(async product => {
+        const maybeMenuItem = await findMenuItem(product.id);
+        if (!maybeMenuItem) {
+            return res.status(400).json({
+                success: false,
+                message: `Invalid menu item id: ${product.id}.`
+            });
+        }
+    });
+
+    // Invänta checkProducts
+    try {
+        await Promise.all(checkProducts);
+        next();
+    } catch (error) {
+        return res.status(400).json({
+            success: false,
+            message: 'Oh no! Something went wrong.',
+            error: error
+        })
+    }
+}
+
 module.exports = {
     checkSchema,
     checkProperty,
-    orderValidation
+    orderValidation,
+    campaignValidation
 }

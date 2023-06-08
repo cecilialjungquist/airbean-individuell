@@ -8,10 +8,10 @@ const app = express();
 const PORT = 1337;
 
 app.use(express.json());
-app.use((req, res, next) => {
-	console.log(`${req.method}  ${req.url} `, req.body)
-	next()
-});
+// app.use((req, res, next) => {
+// 	console.log(`${req.method}  ${req.url} `, req.body)
+// 	next()
+// });
 
 app.use('/api/beans', beansRoutes);
 app.use('/api/user', userRoutes);
