@@ -70,8 +70,26 @@ async function orderValidation(req, res, next) {
     next();
 }
 
+function campaignValidation(req, res, next) {
+    const products = req.body.products;
+    const campaignPrice = req.body.campaignPrice;
+
+    // Kolla om produkter finns i menyn
+    products.map(async product => {
+        const maybeMenuItem = await findMenuItem(product.id);
+        if (!maybeMenuItem) {
+            return res.status(400).json({
+                success: false,
+                message: `Invalid menu item id: ${product.id}.`
+            });
+        }
+    })
+    next();
+}
+
 module.exports = {
     checkSchema,
     checkProperty,
-    orderValidation
+    orderValidation,
+    campaignValidation
 }
